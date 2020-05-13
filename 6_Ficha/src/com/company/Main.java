@@ -98,5 +98,8 @@ public class Main {
         System.out.println("Exercicio c):\n" + drive.ordenarVeiculos(Veiculo::compareTo));
 
 
+    // ------------ FASE 3 -------------
+
+
     }
 }
