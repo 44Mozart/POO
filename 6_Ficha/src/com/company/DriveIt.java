@@ -1,8 +1,9 @@
 package com.company;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DriveIt {
+public class DriveIt implements Serializable {
     private Map<String, Veiculo> veiculos;
 
     /* Construtores */
@@ -43,6 +44,13 @@ public class DriveIt {
         veiculos.entrySet().forEach(v -> this.veiculos.putIfAbsent(v.getKey(), v.getValue().clone()));
     }
 
+    public void removeVeiculo (String matricula) throws NaoExisteVeiculoException {
+        if(!this.veiculos.containsKey(matricula)){
+            throw new NaoExisteVeiculoException(matricula);
+        }
+        this.veiculos.remove(matricula);
+    }
+
 
     /* Métodos do exercício 1 da ficha 6 */
 
@@ -73,7 +81,10 @@ public class DriveIt {
     }
 
     /* e) */
-    public void adiciona(Veiculo v){
+    public void adiciona(Veiculo v) throws ExisteVeiculoException {
+        if(this.veiculos.containsKey(v.getMatricula())){
+            throw new ExisteVeiculoException(v.getMatricula());
+        }
         this.veiculos.putIfAbsent(v.getMatricula(), v.clone());
     }
 
@@ -220,6 +231,28 @@ public class DriveIt {
     }
 
 
+    public void gravarTxt(String filename) throws IOException {
+        PrintWriter p = new PrintWriter(filename);
+        p.print(this);
+        p.flush();
+        p.close();
+    }
+
+    public void gravaBinario (String filename) throws IOException {
+        FileOutputStream f = new FileOutputStream(filename);
+        ObjectOutputStream o = new ObjectOutputStream(f);
+        o.writeObject(this);
+        o.flush();
+        o.close();
+    }
+
+    public DriveIt lerObj(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream f = new FileInputStream(filename);
+        ObjectInputStream o = new ObjectInputStream(f);
+        DriveIt t = (DriveIt) o.readObject();
+        o.close();
+        return t;
+    }
 
 
 }

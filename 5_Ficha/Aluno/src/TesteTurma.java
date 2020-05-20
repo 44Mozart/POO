@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +42,20 @@ public class TesteTurma
         
         System.out.println("Numerica:");
         System.out.println(t.alunosOrdemDecrescenteNumero());
+
+        try{
+            t.gravaBinario("PL5.obj");
+        }catch (IOException e) {
+            System.out.println("Erro a gravar!");
+        }
+
+        TurmaAlunos t2 = new TurmaAlunos();
+        try{
+            t2 = t2.lerObj("PL5.obj");
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println("Erro a ler!");
+        }
+        System.out.println(t2);
     }
     
 }

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Objects;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Aluno implements Comparable<Aluno>,Classificacoes
+public class Aluno implements Comparable<Aluno>,Classificacoes, Serializable
 {
     private String numero;
     private String nome;

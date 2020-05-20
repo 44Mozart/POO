@@ -1,8 +1,9 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Veiculo implements Comparable<Veiculo> {
+public abstract class Veiculo implements Comparable<Veiculo>, Serializable {
     private String matricula;
     private String marca;
     private String modelo;
@@ -106,19 +107,54 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
     /* Setters */
 
-    public void setNumCfs(int n){
-        this.numCfs = n;
+    public void setNumCfs(int n) throws NumeroNegativo {
+        if(n < 0){
+            throw new NumeroNegativo();
+        }
+        else{
+            this.numCfs = n;
+        }
     }
 
-    public void setNumKms(int numKms){
+    public void setAno(int ano) throws NumeroNegativo {
+        if(ano < 0){
+            throw new NumeroNegativo();
+        }
+        this.ano = ano;
+    }
+
+    public void setVelocidade_media(double velocidade_media) throws NumeroNegativo {
+        if(velocidade_media < 0){
+            throw new NumeroNegativo();
+        }
+        this.velocidade_media = velocidade_media;
+    }
+
+    public void setPreco(double preco) throws NumeroNegativo {
+        if(preco < 0){
+            throw new NumeroNegativo();
+        }
+        this.preco = preco;
+    }
+
+    public void setNumKms(int numKms) throws NumeroNegativo {
+        if(numKms < 0){
+            throw new NumeroNegativo();
+        }
         this.numKms = numKms;
     }
 
-    public void setClassificacao_media(double classificacaomed){
+    public void setClassificacao_media(double classificacaomed) throws NumeroNegativo {
+        if(classificacaomed < 0){
+            throw new NumeroNegativo();
+        }
         this.classificacao_media = classificacaomed;
     }
 
-    public void setSoma_classificacoes(int soma_classificacoes){
+    public void setSoma_classificacoes(int soma_classificacoes) throws NumeroNegativo {
+        if(soma_classificacoes< 0){
+            throw new NumeroNegativo();
+        }
         this.soma_classificacoes = soma_classificacoes;
     }
 

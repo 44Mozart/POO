@@ -5,13 +5,14 @@
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
+import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class TurmaAlunos implements Classificacoes
+public class TurmaAlunos implements Classificacoes,Serializable
 {
     private String nome;
     private String codigo;
@@ -141,6 +142,30 @@ public class TurmaAlunos implements Classificacoes
                           .mapToDouble(a -> a.mediaClassificacoes())
                           .sum()/this.alunos.size();
     }
+
+    public void gravarTxt(String filename) throws IOException {
+        PrintWriter p = new PrintWriter(filename);
+        p.print(this);
+        p.flush();
+        p.close();
+    }
+
+    public void gravaBinario (String filename) throws IOException {
+        FileOutputStream f = new FileOutputStream(filename);
+        ObjectOutputStream o = new ObjectOutputStream(f);
+        o.writeObject(this);
+        o.flush();
+        o.close();
+    }
+
+    public TurmaAlunos lerObj(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream f = new FileInputStream(filename);
+        ObjectInputStream o = new ObjectInputStream(f);
+        TurmaAlunos t = (TurmaAlunos) o.readObject();
+        o.close();
+        return t;
+    }
+
     
     
     
