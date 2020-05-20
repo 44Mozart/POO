@@ -2,27 +2,31 @@ package com.company;
 
 import java.util.Objects;
 
-public class AutocarroInteligente extends Veiculo{
+public class AutocarroInteligente extends Veiculo implements BonificaKms{
     private int ocupacao;
     private int lotacao;
+    private int pontos;
 
 
     public AutocarroInteligente() {
         super();
         this.ocupacao = 0;
         this.lotacao = 0;
+        this.pontos = 0;
     }
 
-    public AutocarroInteligente(String matricula, String marca, String modelo, int ano, double velocidade_media, double preco, int soma_classificacoes, double classificacao_media, int numCfs, int numKms, int ocupacao,int lotacao) {
+    public AutocarroInteligente(String matricula, String marca, String modelo, int ano, double velocidade_media, double preco, int soma_classificacoes, double classificacao_media, int numCfs, int numKms, int ocupacao,int lotacao,int pontos) {
         super(matricula, marca, modelo, ano, velocidade_media, preco, soma_classificacoes, classificacao_media, numCfs, numKms);
         this.ocupacao = ocupacao;
         this.lotacao = lotacao;
+        this.pontos = pontos;
     }
 
     public AutocarroInteligente(AutocarroInteligente v) {
         super(v);
         this.ocupacao = v.getOcupacao();
         this.lotacao = v.getLotacao();
+        this.pontos = v.getPtsPorKm();
     }
 
     public int getOcupacao() {
@@ -47,20 +51,21 @@ public class AutocarroInteligente extends Veiculo{
         if (!super.equals(o)) return false;
         AutocarroInteligente that = (AutocarroInteligente) o;
         return getOcupacao() == that.getOcupacao() &&
-                getLotacao() == that.getLotacao();
+                getLotacao() == that.getLotacao() &&
+                pontos == that.pontos;
     }
 
     public int hashCode() {
-        return Objects.hash(getOcupacao(), getLotacao());
+        return Objects.hash(getOcupacao(), getLotacao(), pontos);
     }
 
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(super.toString());
-        s.append(" Ocupacao: ").append(ocupacao);
-        s.append(" Lotacao Maxima: ").append(lotacao);
-        s.append("\n");
-        return s.toString();
+        final StringBuilder sb = new StringBuilder("AutocarroInteligente{");
+        sb.append("ocupacao=").append(ocupacao);
+        sb.append(", lotacao=").append(lotacao);
+        sb.append(", pontos=").append(pontos);
+        sb.append('}');
+        return sb.toString();
     }
 
     public AutocarroInteligente clone(){
@@ -71,5 +76,13 @@ public class AutocarroInteligente extends Veiculo{
         double percentagem = ocupacao/lotacao;
         if(percentagem <= 0.6) return getNumKms() * getPreco() * 1.5;
         return getNumKms() * getPreco() * 1.75;
+    }
+
+    public void definirPtsPorKm(int pts) {
+        this.pontos = pts;
+    }
+
+    public int getPtsPorKm() {
+        return this.pontos;
     }
 }

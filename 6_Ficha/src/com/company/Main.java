@@ -13,10 +13,10 @@ public class Main {
 	VeiculoNormal v4 = new VeiculoNormal("55-TY-09", "Skoda", "Scala", 2010, 75.6, 4.8, 0,0.0, 0, 20);
     VeiculoOcasiao v5 = new VeiculoOcasiao("56-GG-78", "Fiat", "Punto", 2006, 72.3, 3.7, 0,0.0, 0, 32,true);
     VeiculoOcasiao v6 = new VeiculoOcasiao("05-HJ-72", "Porsche", "Carrera", 2009, 95.3, 5.2, 0,0.0, 0, 43,false);
-    VeiculoPremium v9 = new VeiculoPremium("20-FD-12", "Porsche", "Panamera", 2008, 89.1, 4.5,0, 0.0, 0, 0,1.50);
-    VeiculoPremium v10 = new VeiculoPremium("44-WM-44", "Ford", "Galaxy", 2000, 60.1, 3.5,0, 0.0, 0, 25,1.30);
-    AutocarroInteligente a1 = new AutocarroInteligente("23-EE-10", "Mercedes", "Benz", 2006, 76.3, 4.5, 0, 0.0, 0, 20,45,60);
-    AutocarroInteligente a2 = new AutocarroInteligente("33-RT-12", "Mercedes", "Benz", 2003, 66.3, 3.1, 0, 0.0, 0, 30,20,60);
+    VeiculoPremium v9 = new VeiculoPremium("20-FD-12", "Porsche", "Panamera", 2008, 89.1, 4.5,0, 0.0, 0, 0,1.50,4);
+    VeiculoPremium v10 = new VeiculoPremium("44-WM-44", "Ford", "Galaxy", 2000, 60.1, 3.5,0, 0.0, 0, 25,1.30,2);
+    AutocarroInteligente a1 = new AutocarroInteligente("23-EE-10", "Mercedes", "Benz", 2006, 76.3, 4.5, 0, 0.0, 0, 20,45,60,12);
+    AutocarroInteligente a2 = new AutocarroInteligente("33-RT-12", "Mercedes", "Benz", 2003, 66.3, 3.1, 0, 0.0, 0, 30,20,60,10);
 
     System.out.println("Carros gerados\n");
 
@@ -100,6 +100,7 @@ public class Main {
 
     // ------------ FASE 3 -------------
 
+        System.out.println("Exercicio 3):\n" + drive.daoPontos());
 
     }
 }

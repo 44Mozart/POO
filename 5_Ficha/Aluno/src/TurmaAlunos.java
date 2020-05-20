@@ -56,10 +56,12 @@ public class TurmaAlunos implements Classificacoes
         als.entrySet().forEach(e -> this.alunos.put(e.getKey()
                                                    ,e.getValue().clone()));
     }
-    
     // B.ii
-    public void insereAluno(Aluno a){
-        this.alunos.put(a.getNumero(),a.clone());
+    public void insereAluno(Aluno a) throws ExisteAlunoException {
+        if(this.alunos.containsKey(a.getNumero()))
+            throw new ExisteAlunoException(a.getNumero());
+        else
+            this.alunos.put(a.getNumero(),a.clone());
     }
     
     //B.iii
@@ -68,10 +70,13 @@ public class TurmaAlunos implements Classificacoes
     }
     
     //B.iv
-    public void removeAluno (String codAluno){
+    public void removeAluno (String codAluno) throws  NaoExisteAlunoException{
+        if(!this.alunos.containsKey(codAluno)){
+            throw new NaoExisteAlunoException(codAluno);
+        }
         this.alunos.remove(codAluno);
     }
-    
+
     //B.v
     public Set<String> todosOsCodigos(){
         return this.alunos.keySet();

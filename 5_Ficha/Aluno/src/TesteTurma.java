@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,19 +11,27 @@ import java.util.List;
 public class TesteTurma
 {
     public static void main(String[] opts){
-        List<Double> a = new ArrayList<>();
-        List<Double> b = new ArrayList<>();
-        List<Double> c = new ArrayList<>();
-        Aluno a1 = new Aluno("1","Ze",a);
-        Aluno a2 = new Aluno("2","Ana",b);
-        Aluno a3 = new Aluno("3","To",c);
-        
+        Aluno a1 = new Aluno("1","Ze", Arrays.asList(1.0,2.0,3.0));
+        Aluno a2 = new Aluno("2","Ana",Arrays.asList(2.0,3.2,1.0));
+        Aluno a3 = new Aluno("3","To",Arrays.asList(2.0,2.0,2.2));
+        AlunoTE a4 = new AlunoTE("4","Mar",Arrays.asList(2.1,2.3,3.2),"Mc");
         TurmaAlunos t = new TurmaAlunos();
-        
-        t.insereAluno(a1);
-        t.insereAluno(a2);
-        t.insereAluno(a3);
-        
+        try {
+            t.insereAluno(a1);
+            t.insereAluno(a2);
+            t.removeAluno("5");
+            t.insereAluno(a3);
+            t.insereAluno(a1);
+            t.insereAluno(a4);
+        } catch (ExisteAlunoException e) {
+            System.out.println("Já existe o aluno " + e.getMessage());
+        } catch (NaoExisteAlunoException e){
+            System.out.println("Não existe o aluno com numero " + e.getMessage());
+        }
+
+
+
+
         System.out.println("Turma:");
         System.out.println(t.toString());
         

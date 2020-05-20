@@ -43,6 +43,7 @@ public class DriveIt {
         veiculos.entrySet().forEach(v -> this.veiculos.putIfAbsent(v.getKey(), v.getValue().clone()));
     }
 
+
     /* Métodos do exercício 1 da ficha 6 */
 
     /* 1.a) */
@@ -203,6 +204,19 @@ public class DriveIt {
         for(Veiculo v: this.veiculos.values())
             s.add(v.clone());
         return s.iterator();
+    }
+
+    /* ------------------ FASE 2 --------------- */
+
+    public List<BonificaKms> daoPontos(){
+        List<BonificaKms> aux = new ArrayList<>();
+        for(Veiculo v: this.veiculos.values()) {
+            if (v instanceof VeiculoPremium || v instanceof AutocarroInteligente) {
+                BonificaKms bk = (BonificaKms) v.clone();
+                aux.add(bk);
+            }
+        }
+        return aux;
     }
 
 
